@@ -25,18 +25,29 @@ class _ToDoDialogState extends State<ToDoDialog> {
 
   String valueText = "";
 
+  String priorityText = "";
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text('Item To Add'),
-      content: TextField(
-        onChanged: (value) {
-          setState(() {
-            valueText = value;
-          });
-        },
-        controller: _inputController,
-        decoration: const InputDecoration(hintText: "type something here"),
+      content: Column(
+          children: [TextField(
+            onChanged: (value) {
+              setState(() {
+                valueText = value;
+              });
+            },
+            controller: _inputController,
+            decoration: const InputDecoration(hintText: "type something here"),
+          ),
+          TextField(
+            onChanged: (value) {
+              setState((){
+                
+              });
+            },
+          ),]
       ),
       actions: <Widget>[
         ElevatedButton(

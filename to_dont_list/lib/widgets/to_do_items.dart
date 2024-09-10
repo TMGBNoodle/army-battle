@@ -49,13 +49,17 @@ class ToDoListItem extends StatelessWidget {
               onDeleteItem(item);
             }
           : null,
-      leading: CircleAvatar(
-        backgroundColor: Colors.black54,
-        child: Text(item.abbrev()),
+      leading: FloatingActionButton(
+        onPressed: item.AddPrior,
+        backgroundColor: Colors.purpleAccent,
       ),
       title: Text(
         item.name,
         style: _getTextStyle(context),
+      ),
+      trailing: FloatingActionButton(
+        onPressed: item.subPrior,
+        backgroundColor: Colors.amber,
       ),
     );
   }

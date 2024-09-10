@@ -54,6 +54,9 @@ class _ToDoListState extends State<ToDoList> {
 
   @override
   Widget build(BuildContext context) {
+    items.sort((a, b){
+        return a.Compare(b);
+    });
     return Scaffold(
         appBar: AppBar(
           title: const Text('To Do List'),
