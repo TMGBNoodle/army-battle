@@ -13,6 +13,7 @@ class Item {
 
   void AddPrior() {
     priority +=1;
+    print(priority);
   }
   void subPrior(){
     priority -=1;

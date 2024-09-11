@@ -61,7 +61,10 @@ class ToDoListItem extends StatelessWidget {
         style: _getTextStyle(context),
       ),
       trailing: FloatingActionButton(
-        onPressed: item.subPrior,
+        onPressed: () {
+          item.subPrior();
+          onListChanged(item, completed);
+        },
         backgroundColor: Colors.amber,
       ),
     );
