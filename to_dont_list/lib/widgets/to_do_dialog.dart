@@ -1,7 +1,9 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 typedef ToDoListAddedCallback = Function(
-    String value, TextEditingController textConroller);
+    int priority, String value, TextEditingController textConroller);
 
 class ToDoDialog extends StatefulWidget {
   const ToDoDialog({
@@ -15,6 +17,13 @@ class ToDoDialog extends StatefulWidget {
   State<ToDoDialog> createState() => _ToDoDialogState();
 }
 
+bool _isNumeric(String str) {
+  if(str == null) {
+    return false;
+  }
+  return double.tryParse(str) != null;
+}
+
 class _ToDoDialogState extends State<ToDoDialog> {
   // Dialog with text from https://www.appsdeveloperblog.com/alert-dialog-with-a-text-field-in-flutter/
   final TextEditingController _inputController = TextEditingController();
@@ -26,6 +35,8 @@ class _ToDoDialogState extends State<ToDoDialog> {
   String valueText = "";
 
   String priorityText = "";
+
+  int AssignedPriority = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +55,12 @@ class _ToDoDialogState extends State<ToDoDialog> {
           TextField(
             onChanged: (value) {
               setState((){
-                
+                priorityText = value;
+                print(priorityText);
+                if(_isNumeric(priorityText)){
+                  print("Successful parse");
+                  AssignedPriority = int.parse(priorityText);
+                }
               });
             },
           ),]
@@ -71,7 +87,7 @@ class _ToDoDialogState extends State<ToDoDialog> {
               onPressed: value.text.isNotEmpty
                   ? () {
                       setState(() {
-                        widget.onListAdded(valueText, _inputController);
+                        widget.onListAdded(AssignedPriority, valueText, _inputController);
                         Navigator.pop(context);
                       });
                     }

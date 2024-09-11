@@ -43,10 +43,11 @@ class _ToDoListState extends State<ToDoList> {
     });
   }
 
-  void _handleNewItem(String itemText, TextEditingController textController) {
+  void _handleNewItem(int itemPriority, String itemText, TextEditingController textController) {
     setState(() {
-      print("Adding new item");
+      print("New List Item Added with priority of " + itemPriority.toString() + " and a name of " + itemText);
       Item item = Item(name: itemText);
+      item.setPrior(itemPriority);
       items.insert(0, item);
       textController.clear();
     });
@@ -54,9 +55,11 @@ class _ToDoListState extends State<ToDoList> {
 
   @override
   Widget build(BuildContext context) {
+    print("Items: " + items.toString());
     items.sort((a, b){
         return a.Compare(b);
     });
+    print("Second Items: " + items.toString());
     return Scaffold(
         appBar: AppBar(
           title: const Text('To Do List'),

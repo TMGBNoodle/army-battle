@@ -3,7 +3,7 @@
 class Item {
   const Item({required this.name});
 
-  static int priority = 10;
+  static int priority = 0;
   final String name;
 
   String abbrev() {
@@ -15,6 +15,9 @@ class Item {
   }
   void subPrior(){
     priority -=1;
+  }
+  void setPrior(int newPrior){
+    priority = newPrior;
   }
 
   int getPrior(){
@@ -28,5 +31,9 @@ class Item {
       return -1;
     }
     return 0;
+  }
+  @override
+  String toString() {
+    return name;
   }
 }
