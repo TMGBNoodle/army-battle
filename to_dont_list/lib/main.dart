@@ -12,7 +12,7 @@ class ToDoList extends StatefulWidget {
 }
 
 class _ToDoListState extends State<ToDoList> {
-  final List<Item> items = [const Item(name: "add more todos")];
+  final List<Item> items = [Item(name: "add more todos", priority: 1)];
   final _itemSet = <Item>{};
 
   void _handleListChanged(Item item, bool completed) {
@@ -22,17 +22,11 @@ class _ToDoListState extends State<ToDoList> {
       // trigger a rebuild.
       // The framework then calls build, below,
       // which updates the visual appearance of the app.
-
-      items.remove(item);
-      if (!completed) {
-        print("Completing");
-        _itemSet.add(item);
-        items.add(item);
-      } else {
-        print("Making Undone");
-        _itemSet.remove(item);
-        items.insert(0, item);
-      }
+      print(items);
+      items.sort((a, b){
+          return a.Compare(b);
+      });
+      print(items);
     });
   }
 
@@ -40,25 +34,30 @@ class _ToDoListState extends State<ToDoList> {
     setState(() {
       print("Deleting item");
       items.remove(item);
+      print(items);
+      items.sort((a, b){
+        return a.Compare(b);
+      });
+      print(items);
     });
   }
 
   void _handleNewItem(int itemPriority, String itemText, TextEditingController textController) {
     setState(() {
       print("New List Item Added with priority of " + itemPriority.toString() + " and a name of " + itemText);
-      Item item = Item(name: itemText);
-      item.setPrior(itemPriority);
+      Item item = Item(name: itemText, priority: itemPriority);
       items.insert(0, item);
       textController.clear();
+      print(items);
+      items.sort((a, b){
+        return a.Compare(b);
+      });
+      print(items);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    print("Items: " + items.toString());
-    items.sort((a, b){
-        return a.Compare(b);
-    });
     print("Second Items: " + items.toString());
     return Scaffold(
         appBar: AppBar(

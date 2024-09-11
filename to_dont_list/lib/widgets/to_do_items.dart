@@ -41,16 +41,19 @@ class ToDoListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () {
-        onListChanged(item, completed);
-      },
-      onLongPress: completed
-          ? () {
-              onDeleteItem(item);
-            }
-          : null,
+      // onTap: () {
+      //   onListChanged(item, completed);
+      // },
+      // onLongPress: completed
+      //     ? () {
+      //         onDeleteItem(item);
+      //       }
+      //     : null,
       leading: FloatingActionButton(
-        onPressed: item.AddPrior,
+        onPressed: () {
+          item.AddPrior();
+          onListChanged(item, completed);
+        },
         backgroundColor: Colors.purpleAccent,
       ),
       title: Text(

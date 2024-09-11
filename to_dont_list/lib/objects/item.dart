@@ -1,9 +1,10 @@
 // Data class to keep the string and have an abbreviation function
 
 class Item {
-  const Item({required this.name});
+  Item({required this.name,
+   required this.priority});
 
-  static int priority = 0;
+  int priority;
   final String name;
 
   String abbrev() {
@@ -15,9 +16,6 @@ class Item {
   }
   void subPrior(){
     priority -=1;
-  }
-  void setPrior(int newPrior){
-    priority = newPrior;
   }
 
   int getPrior(){
@@ -34,6 +32,6 @@ class Item {
   }
   @override
   String toString() {
-    return name;
+    return name + " " + priority.toString();
   }
 }
