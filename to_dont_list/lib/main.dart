@@ -12,10 +12,10 @@ class ToDoList extends StatefulWidget {
 }
 
 class _ToDoListState extends State<ToDoList> {
-  final List<Item> items = [Item(name: "add more todos", priority: 1)];
-  final _itemSet = <Item>{};
+  final List<Army> items = [Army(name: "add more todos", priority: 1, health:100)];
+  final _itemSet = <Army>{};
 
-  void _handleListChanged(Item item, bool completed) {
+  void _handleListChanged(Army item, bool completed) {
     setState(() {
       // When a user changes what's in the list, you need
       // to change _itemSet inside a setState call to
@@ -30,7 +30,7 @@ class _ToDoListState extends State<ToDoList> {
     });
   }
 
-  void _handleDeleteItem(Item item) {
+  void _handleDeleteItem(Army item) {
     setState(() {
       print("Deleting item");
       items.remove(item);
@@ -44,8 +44,8 @@ class _ToDoListState extends State<ToDoList> {
 
   void _handleNewItem(int itemPriority, String itemText, TextEditingController textController) {
     setState(() {
-      print("New List Item Added with priority of " + itemPriority.toString() + " and a name of " + itemText);
-      Item item = Item(name: itemText, priority: itemPriority);
+      print("New List Item Added with priority of $itemPriority and a name of $itemText");
+      Army item = Army(name: itemText, priority: itemPriority);
       items.insert(0, item);
       textController.clear();
       print(items);
@@ -58,7 +58,7 @@ class _ToDoListState extends State<ToDoList> {
 
   @override
   Widget build(BuildContext context) {
-    print("Second Items: " + items.toString());
+    print("Second Items: $items");
     return Scaffold(
         appBar: AppBar(
           title: const Text('To Do List'),

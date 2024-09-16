@@ -14,24 +14,24 @@ import 'package:to_dont_list/widgets/to_do_items.dart';
 
 void main() {
   test('Item abbreviation should be first letter', () {
-    Item item = Item(name: "add more todos", priority: 1);
+    Army item = Army(name: "add more todos", priority: 1);
     expect(item.abbrev(), "a");
   });
 
   test("Item compare function works", () {
-    Item thisitem = Item(name: "This", priority: 1);
-    Item theOtherItem = Item(name:"Other", priority:2);
-    Item theSameItem = Item(name:"Similar", priority: 1);
+    Army thisitem = Army(name: "This", priority: 1);
+    Army theOtherItem = Army(name:"Other", priority:2);
+    Army theSameItem = Army(name:"Similar", priority: 1);
     expect(theOtherItem.Compare(thisitem), 1);
     expect(thisitem.Compare(theOtherItem), -1);
     expect(thisitem.Compare(theSameItem), 0);
   });
 
   test("Sorting a list of items", () {
-    Item a = Item(name: "A", priority: 3);
-    Item b = Item(name: "B", priority: 1);
-    Item c = Item(name: "C", priority: 2);
-    List<Item> mock = [a, b, c];
+    Army a = Army(name: "A", priority: 3);
+    Army b = Army(name: "B", priority: 1);
+    Army c = Army(name: "C", priority: 2);
+    List<Army> mock = [a, b, c];
 
     mock.sort((a, b){
       return a.Compare(b);
@@ -44,10 +44,10 @@ void main() {
     await tester.pumpWidget(MaterialApp(
         home: Scaffold(
             body: ToDoListItem(
-                item: Item(name: "test", priority: 2),
+                item: Army(name: "test", priority: 2),
                 completed: true,
-                onListChanged: (Item item, bool completed) {},
-                onDeleteItem: (Item item) {}))));
+                onListChanged: (Army item, bool completed) {},
+                onDeleteItem: (Army item) {}))));
     final textFinder = find.text('test');
 
     // Use the `findsOneWidget` matcher provided by flutter_test to verify

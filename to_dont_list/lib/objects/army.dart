@@ -1,12 +1,12 @@
-
 // Data class to keep the string and have an abbreviation function
 
 class Army {
   Army({required this.name,
-   required this.priority, required this.health});
+   required this.position, required this.health, required this.attack});
 
-  int priority;
-  int health = 100;
+  int position;
+  int health;
+  int attack;
   final String name;
 
   String abbrev() {
@@ -14,27 +14,27 @@ class Army {
   }
 
   void AddPrior() {
-    priority +=1;
-    print(priority);
+    position +=1;
+    print(position);
   }
   void subPrior(){
-    priority -=1;
+    position -=1;
   }
 
   int getPrior(){
-    return priority;
+    return position;
   }
   
   int Compare(Army b) {
-    if(priority > b.getPrior()){
+    if(position > b.getPrior()){
       return 1;
-    } else if(priority < b.getPrior()){
+    } else if(position < b.getPrior()){
       return -1;
     }
     return 0;
   }
   @override
   String toString() {
-    return "$name $priority";
+    return "$name $position";
   }
 }
