@@ -3,10 +3,9 @@
 
 class Army {
   Army({required this.name,
-   required this.priority, required this.health});
+   required this.priority});
 
   int priority;
-  int health = 100;
   final String name;
 
   String abbrev() {

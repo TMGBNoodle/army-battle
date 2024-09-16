@@ -1,7 +1,7 @@
 // Started with https://docs.flutter.dev/development/ui/widgets-intro
 import 'package:flutter/material.dart';
-import 'package:to_dont_list/objects/item.dart';
-import 'package:to_dont_list/widgets/to_do_items.dart';
+import 'package:to_dont_list/objects/army.dart';
+import 'package:to_dont_list/widgets/army_tile.dart';
 import 'package:to_dont_list/widgets/to_do_dialog.dart';
 
 class ToDoList extends StatefulWidget {
@@ -12,65 +12,59 @@ class ToDoList extends StatefulWidget {
 }
 
 class _ToDoListState extends State<ToDoList> {
-  final List<Army> items = [Army(name: "add more todos", priority: 1, health:100)];
+  final List<Army> armies = [Army(name: "add more todos", position: 1, health:100, attack: 10)];
   final _itemSet = <Army>{};
 
-  void _handleListChanged(Army item, bool completed) {
+  void _handleListChanged(Army item) {
     setState(() {
       // When a user changes what's in the list, you need
       // to change _itemSet inside a setState call to
       // trigger a rebuild.
       // The framework then calls build, below,
       // which updates the visual appearance of the app.
-      print(items);
-      items.sort((a, b){
+      armies.sort((a, b){
           return a.Compare(b);
       });
-      print(items);
     });
   }
 
   void _handleDeleteItem(Army item) {
     setState(() {
-      print("Deleting item");
-      items.remove(item);
-      print(items);
-      items.sort((a, b){
+      armies.remove(item);
+      armies.sort((a, b){
         return a.Compare(b);
       });
-      print(items);
     });
   }
 
-  void _handleNewItem(int itemPriority, String itemText, TextEditingController textController) {
+  void _handleNewItem(int armyHealth, int armyAttack, int armyPos, String armyText, TextEditingController textController1, TextEditingController textController2, TextEditingController textController3, TextEditingController textController4) {
     setState(() {
-      print("New List Item Added with priority of $itemPriority and a name of $itemText");
-      Army item = Army(name: itemText, priority: itemPriority);
-      items.insert(0, item);
-      textController.clear();
-      print(items);
-      items.sort((a, b){
+      print("New List Item Added with priority of $armyPos and a name of $armyText");
+      Army item = Army(name: armyText, position: armyPos, health: armyHealth, attack: armyAttack);
+      armies.insert(0, item);
+      textController1.clear();
+      textController2.clear();
+      textController4.clear();
+      textController3.clear();
+      armies.sort((a, b){
         return a.Compare(b);
       });
-      print(items);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    print("Second Items: $items");
     return Scaffold(
         appBar: AppBar(
           title: const Text('To Do List'),
         ),
         body: ListView(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
-          children: items.map((item) {
-            return ToDoListItem(
-              item: item,
-              completed: _itemSet.contains(item),
+          children: armies.map((army) {
+            return ArmyTile(
+              army: army,
               onListChanged: _handleListChanged,
-              onDeleteItem: _handleDeleteItem,
+              onListRemoved: _handleDeleteItem,
             );
           }).toList(),
         ),

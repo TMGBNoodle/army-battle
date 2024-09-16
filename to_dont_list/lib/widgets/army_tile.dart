@@ -27,8 +27,8 @@ class ArmyTile extends StatelessWidget {
 
   TextStyle? _getTextStyle(BuildContext context) {
     return const TextStyle(
-      color: Colors.black54,
-      decoration: TextDecoration.lineThrough,
+      color: Colors.black,
+      //decoration: TextDecoration.lineThrough,
     );
   }
 
@@ -41,11 +41,19 @@ class ArmyTile extends StatelessWidget {
           onListChanged(army);
         },
         backgroundColor: Colors.purpleAccent,
+        tooltip: "Moves Army Upwards",
+        child : const Text(
+          "+"
+        )
       ),
-      title: Row(
+      title: Column(
         children: [
           Text(
             army.name,
+            style: _getTextStyle(context),
+          ),
+          Text(
+            "Pos: ${army.position}",
             style: _getTextStyle(context),
           ),
           Text(
@@ -65,7 +73,7 @@ class ArmyTile extends StatelessWidget {
         backgroundColor: Colors.amber,
         tooltip: "Moves Army Downwards",
         child: const Text(
-          "+"
+          "-"
         ),
       ),
     );

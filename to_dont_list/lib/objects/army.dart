@@ -2,7 +2,9 @@
 
 class Army {
   Army({required this.name,
-   required this.position, required this.health, required this.attack});
+   required this.position, 
+   required this.health, 
+   required this.attack});
 
   int position;
   int health;
