@@ -27,14 +27,6 @@ class Army {
     return position;
   }
   
-  int Compare(Army b) {
-    if(position > b.getPrior()){
-      return 1;
-    } else if(position < b.getPrior()){
-      return -1;
-    }
-    return 0;
-  }
   @override
   String toString() {
     return "$name $position";

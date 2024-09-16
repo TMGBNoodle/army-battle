@@ -13,8 +13,24 @@ class ToDoList extends StatefulWidget {
 
 class _ToDoListState extends State<ToDoList> {
   final List<Army> armies = [Army(name: "add more todos", position: 1, health:100, attack: 10)];
-  final _itemSet = <Army>{};
 
+
+  void advanceTime() {
+    setState(() {
+      armies.sort((a, b){
+        if(a.position > b.position){
+          return 1;
+        } else if(a.position < b.position){
+          return -1;
+        } else {
+          a.health -= b.attack;
+          b.health -= a.attack;
+          return 0;
+        }
+    });
+    });
+  }
+  
   void _handleListChanged(Army item) {
     setState(() {
       // When a user changes what's in the list, you need
@@ -23,7 +39,13 @@ class _ToDoListState extends State<ToDoList> {
       // The framework then calls build, below,
       // which updates the visual appearance of the app.
       armies.sort((a, b){
-          return a.Compare(b);
+        if(a.position > b.position){
+          return 1;
+        } else if(a.position < b.position){
+          return -1;
+        } else {
+          return 0;
+        }
       });
     });
   }
@@ -32,7 +54,13 @@ class _ToDoListState extends State<ToDoList> {
     setState(() {
       armies.remove(item);
       armies.sort((a, b){
-        return a.Compare(b);
+        if(a.position > b.position){
+          return 1;
+        } else if(a.position < b.position){
+          return -1;
+        } else {
+          return 0;
+        }
       });
     });
   }
@@ -47,7 +75,13 @@ class _ToDoListState extends State<ToDoList> {
       textController4.clear();
       textController3.clear();
       armies.sort((a, b){
-        return a.Compare(b);
+        if(a.position > b.position){
+          return 1;
+        } else if(a.position < b.position){
+          return -1;
+        } else {
+          return 0;
+        }
       });
     });
   }
@@ -56,7 +90,11 @@ class _ToDoListState extends State<ToDoList> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('To Do List'),
+          title: const Text('Army Warfare'),
+          leading: FloatingActionButton(
+            onPressed: advanceTime,
+            child: const Text("+ Time"),
+          ),
         ),
         body: ListView(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -76,7 +114,8 @@ class _ToDoListState extends State<ToDoList> {
                   builder: (_) {
                     return ToDoDialog(onListAdded: _handleNewItem);
                   });
-            }));
+          }),
+    );
   }
 }
 
