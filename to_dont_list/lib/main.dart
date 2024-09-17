@@ -21,6 +21,7 @@ class _ToDoListState extends State<ToDoList> {
 
   void advanceTime() {
     setState(() {
+      List<Army> marked = [];
       armies.sort((a, b){
         if(a.position > b.position){
           if(a.activated == false) {
@@ -47,9 +48,21 @@ class _ToDoListState extends State<ToDoList> {
           b.color = color;
           a.health -= b.attack;
           b.health -= a.attack;
+          if(a.health <= 0){
+            marked.add(a);
+          }
+          if(b.health <=0){
+            marked.add(b);
+          }
           return 0;
         }
-    });
+      });
+      int i = 0;
+      while(i < marked.length)
+      {
+        armies.remove(marked[i]);
+        i +=1;
+      }
     });
   }
   
