@@ -35,8 +35,10 @@ class ArmyTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      tileColor: army.color,
       leading: FloatingActionButton(
         onPressed: () {
+          army.activated = false;
           army.AddPrior();
           onListChanged(army);
         },
@@ -67,6 +69,7 @@ class ArmyTile extends StatelessWidget {
       ),
       trailing: FloatingActionButton(
         onPressed: () {
+          army.activated = false;
           army.subPrior();
           onListChanged(army);
         },
