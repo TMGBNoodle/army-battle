@@ -18,7 +18,7 @@ class ToDoDialog extends StatefulWidget {
 }
 
 bool _isNumeric(String str) {
-  return double.tryParse(str) != null;
+  return int.tryParse(str) != null;
 }
 
 class _ToDoDialogState extends State<ToDoDialog> {
