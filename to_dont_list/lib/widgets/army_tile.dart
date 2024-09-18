@@ -39,7 +39,7 @@ class ArmyTile extends StatelessWidget {
       leading: FloatingActionButton(
         onPressed: () {
           army.activated = false;
-          army.AddPrior();
+          army.position += 1;
           onListChanged(army);
         },
         backgroundColor: Colors.purpleAccent,
@@ -70,7 +70,7 @@ class ArmyTile extends StatelessWidget {
       trailing: FloatingActionButton(
         onPressed: () {
           army.activated = false;
-          army.subPrior();
+          army.position -= 1;
           onListChanged(army);
         },
         backgroundColor: Colors.amber,

@@ -15,6 +15,34 @@ class ToDoList extends StatefulWidget {
   State createState() => _ToDoListState();
 }
 
+int doSort(Army a, Army b) {
+   if(a.position > b.position){
+          if(a.activated == false) {
+            a.color = Colors.transparent;
+          }
+          if(b.activated == false) {
+            b.color = Colors.transparent;
+          }
+          return 1;
+        } else if(a.position < b.position){
+          if(a.activated == false) {
+            a.color = Colors.transparent;
+          }
+          if(b.activated == false) {
+            b.color = Colors.transparent;
+          }
+          return -1;
+        } else {
+          a.activated = true;
+          b.activated = true;
+          int ind = a.position%3;
+          Color color = tileColors[ind];
+          a.color = color;
+          b.color = color;
+          return 0;
+        }
+}
+
 class _ToDoListState extends State<ToDoList> {
   final List<Army> armies = [Army(name: "add more todos", position: 1, health:100, attack: 10)];
 
@@ -74,31 +102,7 @@ class _ToDoListState extends State<ToDoList> {
       // The framework then calls build, below,
       // which updates the visual appearance of the app.
       armies.sort((a, b){
-        if(a.position > b.position){
-          if(a.activated == false) {
-            a.color = Colors.transparent;
-          }
-          if(b.activated == false) {
-            b.color = Colors.transparent;
-          }
-          return 1;
-        } else if(a.position < b.position){
-          if(a.activated == false) {
-            a.color = Colors.transparent;
-          }
-          if(b.activated == false) {
-            b.color = Colors.transparent;
-          }
-          return -1;
-        } else {
-          a.activated = true;
-          b.activated = true;
-          int ind = a.position%3;
-          Color color = tileColors[ind];
-          a.color = color;
-          b.color = color;
-          return 0;
-        }
+        return doSort(a, b);
       });
     });
   }
@@ -107,31 +111,7 @@ class _ToDoListState extends State<ToDoList> {
     setState(() {
       armies.remove(item);
       armies.sort((a, b){
-        if(a.position > b.position){
-          if(a.activated == false) {
-            a.color = Colors.transparent;
-          }
-          if(b.activated == false) {
-            b.color = Colors.transparent;
-          }
-          return 1;
-        } else if(a.position < b.position){
-          if(a.activated == false) {
-            a.color = Colors.transparent;
-          }
-          if(b.activated == false) {
-            b.color = Colors.transparent;
-          }
-          return -1;
-        } else {
-          a.activated = true;
-          b.activated = true;
-          int ind = a.position%3;
-          Color color = tileColors[ind];
-          a.color = color;
-          b.color = color;
-          return 0;
-        }
+        return doSort(a, b);
       });
     });
   }
@@ -146,31 +126,7 @@ class _ToDoListState extends State<ToDoList> {
       textController4.clear();
       textController3.clear();
       armies.sort((a, b){
-        if(a.position > b.position){
-          if(a.activated = false) {
-            a.color = Colors.transparent;
-          }
-          if(b.activated = false) {
-            b.color = Colors.transparent;
-          }
-          return 1;
-        } else if(a.position < b.position){
-          if(a.activated = false) {
-            a.color = Colors.transparent;
-          }
-          if(b.activated = false) {
-            b.color = Colors.transparent;
-          }
-          return -1;
-        } else {
-          a.activated = true;
-          b.activated = true;
-          int ind = a.position%3;
-          Color color = tileColors[ind];
-          a.color = color;
-          b.color = color;
-          return 0;
-        }
+        return doSort(a, b);
       });
     });
   }

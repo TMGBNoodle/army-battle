@@ -17,18 +17,6 @@ class Army {
   String abbrev() {
     return name.substring(0, 1);
   }
-
-  void AddPrior() {
-    position +=1;
-    print(position);
-  }
-  void subPrior(){
-    position -=1;
-  }
-
-  int getPrior(){
-    return position;
-  }
   
   @override
   String toString() {
