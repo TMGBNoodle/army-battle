@@ -1,2 +1,3 @@
-# to-dont-list
-A broken list of things to do
+# Army War
+
+Create armies and have them battle to the end!
