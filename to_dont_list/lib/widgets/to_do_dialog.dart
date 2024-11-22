@@ -1,6 +1,6 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+
 
 typedef ToDoListAddedCallback = Function(
     int armyHealth, int armyAttack, int armyPos, String armyText, TextEditingController textController,TextEditingController textController1,TextEditingController textController2,TextEditingController textController3);
@@ -46,6 +46,15 @@ class _ToDoDialogState extends State<ToDoDialog> {
 
   int assignedAttack = 0;
 
+  String errorMessageA = '';
+  String errorMessageH = '';
+  String errorMessageP = '';
+
+  bool allTextIsValid(){
+    return (_isNumeric(positionText) && _isNumeric(healthText) && _isNumeric(attackText));
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -67,36 +76,67 @@ class _ToDoDialogState extends State<ToDoDialog> {
                 if(_isNumeric(positionText)){
                   print("Successful parse");
                   assignedPosition = int.parse(positionText);
+                  if(allTextIsValid()){
+                    errorMessageP = '';
+                  }
+
+                }
+                else{
+                  errorMessageP = 'Please enter a number';
                 }
               });
             },
             controller: PositionInput,
             decoration: const InputDecoration(hintText: "Input Army Position Here"),
           ),
+          Text(errorMessageP,
+          style: const TextStyle(
+            color: Colors.red
+          )),
           TextField(
             onChanged: (value) {
               setState((){
                 healthText = value;
                 if(_isNumeric(healthText)){
                   assignedHealth = int.parse(healthText);
+                  if(allTextIsValid()){
+                    errorMessageH = '';
+                  }
+                }
+                else{
+                  errorMessageH = 'Please Enter a Number';
                 }
               });
             },
             controller: HealthInput,
             decoration: const InputDecoration(hintText: "Input Army Health Here"),
           ),
+          Text(errorMessageH,
+          style: const TextStyle(
+            color: Colors.red
+          )),
           TextField(
             onChanged: (value) {
               setState((){
                 attackText = value;
                 if(_isNumeric(attackText)){
                   assignedAttack = int.parse(attackText);
+                  if(allTextIsValid()){
+                    errorMessageA = '';
+                  }
+                }
+                else{
+                  errorMessageA = 'Please enter a number';
                 }
               });
             },
             controller: AttackInput,
             decoration: const InputDecoration(hintText: "Input Army Attack Here"),
           ),
+            Text(errorMessageA,
+          style: const TextStyle(
+            color: Colors.red
+          )),
           ]
       ),
       actions: <Widget>[
@@ -118,7 +158,7 @@ class _ToDoDialogState extends State<ToDoDialog> {
             return ElevatedButton(
               key: const Key("OKButton"),
               style: yesStyle,
-              onPressed: value.text.isNotEmpty
+              onPressed: (value.text.isNotEmpty && allTextIsValid())
                   ? () {
                       setState(() {
                         widget.onListAdded(assignedHealth, assignedAttack, assignedPosition, valueText, NameInput, HealthInput, AttackInput, PositionInput);
